@@ -16,6 +16,7 @@
 		
 		
 		<main> <!--Huvudinnehåll-->
+			Startsida för min webbutik
 		</main>
 		<?
 		require "footer.php";

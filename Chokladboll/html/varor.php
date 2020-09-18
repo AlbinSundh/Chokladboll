@@ -6,3 +6,4 @@
     array("Banan","Gul böjd", "30","bilder/banana.jpg"),
     array("Grapefrukt","Konstig", "300","bilder/banana.jpg"),
   );
+  
