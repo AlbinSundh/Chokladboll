@@ -1,3 +1,14 @@
+<?php
+	$str="";
+	if(isset($_GET['status'])){
+		$str="Felaktigt användare";
+	}
+	elseif($_GET['status']==2){
+		$str="Felaktigt lösenord";
+	}
+?>
+
+
 <!DOCTYPE html>
 
 <html lang="sv">
@@ -20,6 +31,7 @@
 		
 			<main> <!--Huvudinnehåll-->
 				<section>
+				<p><?php echo $str;?></p>
 					 <form action="login2.php" method="post">
             <p><label for="user">Användarnamn:</label>
             <input type="text" id="user" name="username"></p>
@@ -29,7 +41,7 @@
             <input type="submit" value="Logga in">
             </p>
           </form>
-          <p class="create"><a href="createUser-template.php">Skapa användare</a></p>
+          <p class="create"><a href="createUser.php">Skapa användare</a></p>
 				</section>
 			</main>
 
@@ -39,4 +51,4 @@
 	?>
 
 	</body>
-</html>
+</html> 

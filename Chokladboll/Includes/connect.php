@@ -6,7 +6,7 @@
 		exit;
 	}
 	
-	$sql = "SELECT * FROM products";
+	/*$sql = "SELECT * FROM products";
 	$res=$dbh->prepare($sql);
 	$res->execute();
 	$result=$res->get_result();
@@ -24,5 +24,5 @@
 		echo "<br>";
 		echo $row['price']." kronor";
 	}
-	
+	*/
 ?>
