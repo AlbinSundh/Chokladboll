@@ -1,14 +1,3 @@
-<?php
-	$str="";
-	if(isset($_GET['status'])){
-		$str="Felaktigt användare";
-	}
-	elseif($_GET['status']==2){
-		$str="Felaktigt lösenord";
-	}
-?>
-
-
 <!DOCTYPE html>
 
 <html lang="sv">
@@ -24,9 +13,18 @@
             <h1>Min onlinebutik - Logga in</h1>
       </header>
       
-      <<?php
+      <?php
 		require "masthead.php";
 		require "menu.php";
+		$str="";
+            if(isset($_GET['status'])){
+                if($_GET['status']==1){
+                    $str="Felaktig användare";
+                }
+                elseif($_GET['status']==2){
+                    $str="Felaktigt lösenord";
+                }
+            }
 		?>
 		
 			<main> <!--Huvudinnehåll-->

@@ -25,7 +25,7 @@
 			
 			session_start();
 			$_SESSION['username']=$username;
-			header("Location:products.php");
+			header("Location:admin.php");
 		}
 	
 		else{
