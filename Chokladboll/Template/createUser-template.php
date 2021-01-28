@@ -1,19 +1,24 @@
 <?php
-	if(isset($_POST['fname'] && $_POST['ename'] && $_POST['mail'] && $_POST['adress'] && $_POST['zip'] && $_POST['ort'] && $_POST['nummer'] && $_POST['password'])){
-		$fname = filter_input(INPUT_POST, 'fname', FILTER_SANTIZE_STRING, FILER_FLAG_STRIP_LOW);
-		$fname = filter_input(INPUT_POST, 'lname', FILTER_SANTIZE_STRING, FILER_FLAG_STRIP_LOW);
-		$mail = filter_input(INPUT_POST, 'mail', FILTER_SANTIZE_STRING, FILER_FLAG_STRIP_LOW);
-		$zip = filter_input(INPUT_POST, 'pnummer' FILTER_SANTIZE_NUMBER_INT);
+	if(isset($_POST['username']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['adress']) && isset($_POST['zip']) && isset($_POST['city']) && isset($_POST['phone']) && isset($_POST['password'])){
+		$firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANTIZE_STRING, FILER_FLAG_STRIP_LOW);
+		$lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANTIZE_STRING, FILER_FLAG_STRIP_LOW);
+		$email = filter_input(INPUT_POST, 'email', FILTER_SANTIZE_STRING, FILER_FLAG_STRIP_LOW);
+		$adress = filter_input(INPUT_POST, 'adress', FILTER_SANTIZE_STRING, FILER_FLAG_STRIP_LOW);
+		$zip = filter_input(INPUT_POST, 'zip', FILTER_SANTIZE_NUMBER_INT);
+		$city = filter_input(INPUT_POST, 'city', FILTER_SANTIZE_STRING, FILER_FLAG_STRIP_LOW);
+		$phone = filter_input(INPUT_POST, 'phone', FILTER_SANTIZE_NUMBER_INT);
+		$password = filter_input(INPUT_POST, 'password', FILTER_SANTIZE_STRING, FILER_FLAG_STRIP_LOW);
+		$zip = filter_input(INPUT_POST, 'usernamer', FILTER_SANTIZE_STRING, FILER_FLAG_STRIP_LOW);
 	}
 	
 	require "../includes/connect.php";
 	
-	$sql = "SELECT * FROM users WHERE users = ? OR email = ?";
+	$sql = "SELECT * FROM users WHERE username = ? OR email = ?";
 	$res = $dbh -> prepare($sql);
-	$res = bind_param("ss",$username, $mail);
-	$res = execute();
+	$res -> bind_param("ss",$username, $mail);
+	$res -> execute();
 	$result =$res->get_result();
-	$result =$result->fetch_assoc();
+	$row =$result->fetch_assoc();
 	
 	if($row !== NULL){
 		if($row['username']===$username){
@@ -37,18 +42,18 @@
 	
 	else{
 		$status = 1;
-		$sql = "INSERT INTO user(username, email, password, status) VALUE (?,?,?,?)";
-		$res=dhb->prepare($sql);
-		$res->bind_param("sssi,$username, $mail, $password, $status);
+		$sql = "INSERT INTO users(username, email, password, status) VALUE (?,?,?,?)";
+		$res=$dbh->prepare($sql);
+		$res->bind_param("sssi,$username, $email, $password, $status");
 		$res->execute();
 		
-		@sql = "INSERT INTO customers(username, firstname, lastname ,adress, zip, city, phone) VALUE (?,?,?,?,?,?,?)";
-		@res=dbh->prepare($sql);
+		$sql = "INSERT INTO customers(username, firstname, lastname ,address, zip, city, phone) VALUE (?,?,?,?,?,?,?)";
+		$res=dbh->prepare($sql);
 		
-		$str="användare tillagd;
+		$str="användare tillagd";
 	}
 	
-	else{
+	if($str == ""){
 		$str =<<<FORM
 			<form action="login2.php" method="post">
             <p><label for="fname">Förnamn:</label>
